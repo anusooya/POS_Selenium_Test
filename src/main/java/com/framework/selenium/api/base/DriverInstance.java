@@ -15,6 +15,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.framework.utils.GenricFunctions;
+
 
 public class DriverInstance{
 	private static final ThreadLocal<RemoteWebDriver> remoteWebdriver = new ThreadLocal<RemoteWebDriver>();
@@ -40,7 +42,7 @@ public class DriverInstance{
 			dc.setPlatform(Platform.WINDOWS);
 			options.merge(dc);
 
-			remoteWebdriver.set(new RemoteWebDriver(new URL("http://20.244.25.9:4444/wd/hub"), options));
+			remoteWebdriver.set(new RemoteWebDriver(new URL(GenricFunctions.getPropertyValue("qa_server_url")), options));
 			break;
 		case "firefox":
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -48,7 +50,7 @@ public class DriverInstance{
 			desiredCap.setBrowserName("firefox");
 			desiredCap.setPlatform(Platform.WINDOWS);
 			firefoxOptions.merge(desiredCap);
-			remoteWebdriver.set(new RemoteWebDriver(new URL("http://20.244.25.9:4444/wd/hub"), firefoxOptions));
+			remoteWebdriver.set(new RemoteWebDriver(new URL(GenricFunctions.getPropertyValue("qa_server_url")), firefoxOptions));
 			break;
 		case "edge":
 			remoteWebdriver.set(new EdgeDriver());
